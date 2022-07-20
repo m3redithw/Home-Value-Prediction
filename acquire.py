@@ -14,7 +14,7 @@ def new_zillow_data():
     '''
     # Create SQL query.
     sql_query = '''
-    SELECT latitude, longitude, bedroomcnt as bedrooms, bathroomcnt as bathrooms, calculatedfinishedsquarefeet as square_feet, lotsizesquarefeet as lot_size, fips as fips_code, regionidcounty as county_id, yearbuilt as year_built, taxvaluedollarcnt as assessed_value, taxamount as tax_amount
+    SELECT latitude, longitude, bedroomcnt as bedrooms, bathroomcnt as bathrooms, calculatedfinishedsquarefeet as square_feet, lotsizesquarefeet as lot_size, fips as fips_code, yearbuilt as year_built, taxvaluedollarcnt as assessed_value, taxamount as tax_amount
 FROM properties_2017 as p JOIN predictions_2017 as pred USING(parcelid) JOIN
 propertylandusetype as ptype using (propertylandusetypeid)
 WHERE ptype.propertylandusedesc LIKE '%%Single%%' and pred.transactiondate LIKE '2017%%';
