@@ -21,13 +21,7 @@ In this project, we will use statistical testing to analyze the key factors of c
 - Make recommendations on what works or doesn't work in prediction these homes' values.
 
 ## :memo:   Initial Questions
-- Which variables are associated with churn?
 
-- Are average monthly charges higher for customers who churn?
-
-- Are tenure shorter for customer who churn?
-
-- Are additional services independent with churn?
 ## :open_file_folder:   Data Dictionary
 **Variable** |    **Value**    | **Meaning**
 ---|---|---
@@ -51,9 +45,11 @@ In this project, we will use statistical testing to analyze the key factors of c
 
 - Create env.py file to establish connection to mySQL server
 
-- Use **telco_churn** database in the mySQL server
+- Use **zillow** database in the mySQL server
 
-- Write query to join useful tables to gather all data about the customers:  <u>customers, contract_types, payment_types, internet_service_types </u>
+- Read data dictionary and extract meaningful columns 
+
+- Write query to join useful tables to gather all data about the houses in the region:  <u>customers, contract_types, payment_types, internet_service_types </u>
      ```sh
      SELECT * FROM customers JOIN contract_types USING (contract_type_id) JOIN payment_types ON customers.payment_type_id = payment_types.payment_type_id JOIN internet_service_types ON customers.internet_service_type_id = internet_service_types.internet_service_type_id
      ```
