@@ -16,7 +16,12 @@ def prep_zillow(df):
     # Change data type
     df['fips_code'] = df['fips_code'].astype(int)
     df['year_built'] = df['year_built'].astype(int)
-    df['county_id'] = df['county_id'].astype(int)
+    
+    # Data mapping
+    df['county'] = df.fips_code.map({6037: 'Los Angeles', 6059: 'Orange', 6111: 'Ventura'})
+    
+    # Drop column
+    df = df.drop(['fips_code'], axis=1)
     
     # Handle Outliers:
     # The general rule for outliers are:
