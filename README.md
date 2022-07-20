@@ -12,20 +12,16 @@
 
 In this project, we will use statistical testing to analyze the key factors of customers who are more likely to churn, develop a classification model to predict churn based on those factors, and provide recommendations for retaining customers as well as predictions of churn for a list of customers (delivered via csv).
 ## :chart:   Business Goals
-- Find drivers for customer churn at Telco. Why are customers churning?
+- Construct an ML Regression model that predict **propery tax assessed values** ('taxvaluedollarcnt') of Single Family Properties using attributes of the properties.
 
-- Construct a ML classification model that accurately predicts customer churn.
+- Find the key drivers of property value for **single family properties**. Some questions that come to mind are: Why do some properties have a much higher value than others when they are located so close to each other? Why are some properties valued so differently from others when they have nearly the same physical attributes but only differ in location? Is having 1 bathroom worse than having 2 bedrooms?
 
-- Deliver a report that a non-data scientist can read through and understand what steps were taken, why and what was the outcome?
+- Deliver a report that the data science team can read through and replicate, understand what steps were taken, why and what the outcome was.
+
+- Make recommendations on what works or doesn't work in prediction these homes' values.
 
 ## :memo:   Initial Questions
-- Which variables are associated with churn?
 
-- Are average monthly charges higher for customers who churn?
-
-- Are tenure shorter for customer who churn?
-
-- Are additional services independent with churn?
 ## :open_file_folder:   Data Dictionary
 **Variable** |    **Value**    | **Meaning**
 ---|---|---
@@ -49,9 +45,11 @@ In this project, we will use statistical testing to analyze the key factors of c
 
 - Create env.py file to establish connection to mySQL server
 
-- Use **telco_churn** database in the mySQL server
+- Use **zillow** database in the mySQL server
 
-- Write query to join useful tables to gather all data about the customers:  <u>customers, contract_types, payment_types, internet_service_types </u>
+- Read data dictionary and extract meaningful columns 
+
+- Write query to join useful tables to gather all data about the houses in the region:  <u>customers, contract_types, payment_types, internet_service_types </u>
      ```sh
      SELECT * FROM customers JOIN contract_types USING (contract_type_id) JOIN payment_types ON customers.payment_type_id = payment_types.payment_type_id JOIN internet_service_types ON customers.internet_service_type_id = internet_service_types.internet_service_type_id
      ```
