@@ -14,10 +14,31 @@ def new_zillow_data():
     '''
     # Create SQL query.
     sql_query = '''
-    SELECT latitude, longitude, bedroomcnt as bedrooms, bathroomcnt as bathrooms, calculatedfinishedsquarefeet as square_feet, lotsizesquarefeet as lot_size, fips as fips_code, yearbuilt as year_built, taxvaluedollarcnt as assessed_value, taxamount as tax_amount
-FROM properties_2017 as p JOIN predictions_2017 as pred USING(parcelid) JOIN
-propertylandusetype as ptype using (propertylandusetypeid)
-WHERE ptype.propertylandusedesc LIKE '%%Single%%' and pred.transactiondate LIKE '2017%%';
+    SELECT 
+    CONCAT(CONCAT(SUBSTRING(longitude, 1, 4),
+                    ',',
+                    SUBSTRING(longitude, 5, 10)),
+            ', ',
+            CONCAT(SUBSTRING(latitude, 1, 2),
+                    ',',
+                    SUBSTRING(latitude, 3, 10))) AS location,
+    bedroomcnt AS bedrooms,
+    bathroomcnt AS bathrooms,
+    calculatedfinishedsquarefeet AS square_feet,
+    lotsizesquarefeet AS lot_size,
+    fips AS fips_code,
+    yearbuilt AS year_built,
+    taxvaluedollarcnt AS assessed_value,
+    taxamount AS tax_amount
+FROM
+    properties_2017 AS p
+        JOIN
+    predictions_2017 AS pred USING (parcelid)
+        JOIN
+    propertylandusetype AS ptype USING (propertylandusetypeid)
+WHERE
+    ptype.propertylandusedesc LIKE '%%Single%%'
+        AND pred.transactiondate LIKE '2017%%';
     '''
     # Read in DataFrame from Codeup db.
     df = pd.read_sql(sql_query, get_connection('zillow'))
