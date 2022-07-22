@@ -15,19 +15,18 @@ def new_zillow_data():
     # Create SQL query.
     sql_query = '''
     SELECT 
-    CONCAT(CONCAT(SUBSTRING(longitude, 1, 4),
+    CONCAT(SUBSTRING(longitude, 1, 4),
                     ',',
-                    SUBSTRING(longitude, 5, 10)),
-            ', ',
-            CONCAT(SUBSTRING(latitude, 1, 2),
+                    SUBSTRING(longitude, 5, 10)) as longitude,
+	CONCAT(SUBSTRING(latitude, 1, 2),
                     ',',
-                    SUBSTRING(latitude, 3, 10))) AS location,
+                    SUBSTRING(latitude, 3, 10)) as latitude,
     bedroomcnt AS bedrooms,
     bathroomcnt AS bathrooms,
     calculatedfinishedsquarefeet AS square_feet,
     lotsizesquarefeet AS lot_size,
-    fips AS fips_code,
-    yearbuilt AS year_built,
+    CONCAT ('0',fips) AS fips_code,
+    (2017 - yearbuilt) AS age,
     taxvaluedollarcnt AS assessed_value,
     taxamount AS tax_amount
 FROM
