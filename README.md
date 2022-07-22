@@ -25,17 +25,15 @@ In this project, we will use statistical testing to analyze the key factors of c
 ## :open_file_folder:   Data Dictionary
 **Variable** |    **Value**    | **Meaning**
 ---|---|---
-*Contract Type* | 1) Month-to-month 2) One year 3) Two year| This indicates what type of contract the customer has
-*Internet Service Type* | 1) DSL 2) Fiber Optic 3) None | This indicates what type of internet service the customer has, if any
-*Payment Type* | 1) Bank transfer 2) Credit card 3) Electronic check 4) Mailed check | This tells us how is the customer paying for the service
-*Monthly Charges* | Float number | This tells us how much is the customer paying each month
-*Teunure* | Integer ranging from 0-72 | This shows how long (months) does the customer stay with the company
-*Online Bakcup* | 1) Yes 2) No 3) No internet service | This indicates if the customer has online backup service
-*Online Security* | 1) Yes 2) No 3) No internet service | This indicates if the customer has online security service
-*Tech Support*| 1) Yes 2) No 3) No internet service | This indicates if the customer has tech support service
-*Device Protection* | 1) Yes 2) No 3) No internet service | This indicates if the customer has device protection service
-*Streaming TV* | 1) Yes 2) No 3) No internet service | This indicates if the customer has streaming tv service
-*Streaming Movies* | 1) Yes 2) No 3) No internet service | This indicates if the customer has streaming movies service
+*Location* | Latitude, Longitude | This indicates where the property is located
+*Bedrooms* | Integer ranging from 1-6 | Number of bedrooms in home 
+*Bathrooms* | Float ranging from 0.5-6.5| Number of bathrooms in home including fractional bathrooms
+*Square Feet* | Float number | Calculated total finished living area of the home 
+*Lot Size* | Float number | Area of the lot in square feet
+*Year Built* | Integer |  The year the principal residence was built 
+*Assessed Value* | Float number | The total tax assessed value of the parcel
+*Tax Amount*| Float number | The total property tax assessed for that assessment year
+*Conty* | 1) Ventura 2) Los Angeles 3) Orange | County in which the property is located
 
 ## :placard:    Process
 #### :one:   Data Acquisition
@@ -49,24 +47,48 @@ In this project, we will use statistical testing to analyze the key factors of c
 
 - Read data dictionary and extract meaningful columns 
 
-- Write query to join useful tables to gather all data about the houses in the region:  <u>customers, contract_types, payment_types, internet_service_types </u>
+- Write query to join useful tables to gather all data about the houses in the region:  <u>properties_2017, predictions_2017, propertylandusetype </u>
      ```sh
-     SELECT * FROM customers JOIN contract_types USING (contract_type_id) JOIN payment_types ON customers.payment_type_id = payment_types.payment_type_id JOIN internet_service_types ON customers.internet_service_type_id = internet_service_types.internet_service_type_id
+     SELECT 
+    CONCAT(CONCAT(SUBSTRING(longitude, 1, 4),
+                    ',',
+                    SUBSTRING(longitude, 5, 10)),
+            ', ',
+            CONCAT(SUBSTRING(latitude, 1, 2),
+                    ',',
+                    SUBSTRING(latitude, 3, 10))) AS location,
+    bedroomcnt AS bedrooms,
+    bathroomcnt AS bathrooms,
+    calculatedfinishedsquarefeet AS square_feet,
+    lotsizesquarefeet AS lot_size,
+    fips AS fips_code,
+    yearbuilt AS year_built,
+    taxvaluedollarcnt AS assessed_value,
+    taxamount AS tax_amount
+FROM
+    properties_2017 AS p
+        JOIN
+    predictions_2017 AS pred USING (parcelid)
+        JOIN
+    propertylandusetype AS ptype USING (propertylandusetypeid)
+WHERE
+    ptype.propertylandusedesc LIKE '%%Single%%'
+        AND pred.transactiondate LIKE '2017%%';
      ```
 </details>
 
 <details>
 <summary> acqure.py</summary>
 
-- Create acquire.py and user-defined function `get_telco_data()` to gather data from mySQL
+- Create acquire.py and user-defined function `get_zillow_data()` to gather data from mySQL
      ```sh
-     def get_telco_data():
+     def get_zillow_data():
      
-     if os.path.isfile('telco.csv'):
-        df = pd.read_csv('telco.csv', index_col=0)
+     if os.path.isfile('zillow.csv'):
+        df = pd.read_csv('zillow.csv', index_col=0)
     else:
-        df = new_telco_data()
-        df.to_csv('telco.csv')
+        df = new_zillow_data()
+        df.to_csv('zillow.csv')
         
     return df
     ```
@@ -76,7 +98,7 @@ In this project, we will use statistical testing to analyze the key factors of c
 
 - Calling the function, and store the table in the form of dataframe
     ```sh
-    df = acquire.get_telco_data()
+    df = acquire.get_zillow_data()
     ```
 </details>
 
@@ -85,20 +107,20 @@ In this project, we will use statistical testing to analyze the key factors of c
 <details>
 <summary> Data Cleaning</summary>
 
-- **Missing values: null values are dropped** (total_charges)
+- **Missing values: null values are dropped**
      ```sh
-    df['total_charges'] = df['total_charges'].str.strip()
-    df = df[df.total_charges != '']
+    df = df.dropna()
     ```
-- **Data types: object is converted to the numeric datatype** (total_charges)
+- **Data types: float is converted to the int datatype**
      ```sh
-     df['total_charges'] = df.total_charges.astype(float)
+     df['fips_code'] = df['fips_code'].astype(int)
+     df['year_built'] = df['year_built'].astype(int)
      ```
-- **Dummy variables: created dummy variables for binary and non-binary categorical variables**
+- **Data mapping: created new 'county' column with county name corresponding to fips_code**
 
 - **Duplicate columns: duplicated columns are dropped**
 
-- Create function `prep_telco` to clean and prepare data with steps above
+- Create function `prep_zillow` to clean and prepare data with steps above
 
 - Import [prepare.py](prepare.py)
 
@@ -110,7 +132,7 @@ In this project, we will use statistical testing to analyze the key factors of c
 <details>
 <summary> Data Splitting</summary>
 
-- Create function `split_telco_data()` to split data into **train, validate, test**
+- Create function `split()` to split data into **train, validate, test**
 
 - Test prepare function
 
@@ -120,20 +142,14 @@ In this project, we will use statistical testing to analyze the key factors of c
      ```
 - Call the function, and store the 3 data samples separately in the form of dataframe
      ```sh
-     train, validate, test = prepare.split_telco_data(df)
+     train, validate, test = prepare.split(df)
      ```
 </details>
 
 #### :three:   Exploratory Analysis
-- Ask questions to find what are the key variables that are driving the churn
+- Ask questions to find what are the key features that are associated with property assessed value
 
-- Gather and sort churn rate from each driver into .xlsx file
-
-- Import [churn_rates.xlsx](churn_rates.xlsx) and store the data in the form of datafram
-
-- Create visualizations for the churn rate for each variable
-
-- Explore each feature's dependency with churn and create visualization for each
+- Explore each feature's correlation with assessed value and create visualization for each
 
 #### :four:    Statistical Testing & Modeling
 - Conduct T-Test for categorical variable vs. numerical variable
@@ -171,7 +187,7 @@ In this project, we will use statistical testing to analyze the key factors of c
 - [x] Good to run telco_report :smile_cat:
 
 ## :key:    Key Findings
-<img width="800" alt="churn_drivers" src="https://user-images.githubusercontent.com/105242871/179089814-967c69e9-7b54-433b-a310-aa11de46b94f.png">
+
 ▪️ The top 4 drivers of churn are:
 
  - electronic payment type
@@ -197,8 +213,6 @@ In this project, we will use statistical testing to analyze the key factors of c
 ▪️ Offer discount on device protection, streaming tv and streaming movies services
 
 ▪️ Offer online security, online backup, tech support services for free for one-year and two-year contracts customers
-
-<img width="985" alt="revenue_predictions" src="https://user-images.githubusercontent.com/105242871/179146427-9d27fc1f-9e83-4f54-b2ac-eef1f6048a26.png">
 
 
 ## 🔜  Next Steps
