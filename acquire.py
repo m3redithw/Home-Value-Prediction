@@ -25,6 +25,7 @@ def new_zillow_data():
     bathroomcnt AS bathrooms,
     calculatedfinishedsquarefeet AS square_feet,
     lotsizesquarefeet AS lot_size,
+    poolcnt AS has_pool,
     CONCAT ('0',fips) AS fips_code,
     (2017 - yearbuilt) AS age,
     taxvaluedollarcnt AS assessed_value,
