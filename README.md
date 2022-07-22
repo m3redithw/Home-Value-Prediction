@@ -49,7 +49,7 @@ In this project, we will use statistical testing to analyze the key factors of c
 
 - Write query to join useful tables to gather all data about the houses in the region:  <u>properties_2017, predictions_2017, propertylandusetype </u>
      ```sh
-     SELECT 
+    SELECT 
     CONCAT(CONCAT(SUBSTRING(longitude, 1, 4),
                     ',',
                     SUBSTRING(longitude, 5, 10)),
@@ -65,15 +65,15 @@ In this project, we will use statistical testing to analyze the key factors of c
     yearbuilt AS year_built,
     taxvaluedollarcnt AS assessed_value,
     taxamount AS tax_amount
-FROM
-    properties_2017 AS p
-        JOIN
-    predictions_2017 AS pred USING (parcelid)
-        JOIN
-    propertylandusetype AS ptype USING (propertylandusetypeid)
-WHERE
-    ptype.propertylandusedesc LIKE '%%Single%%'
-        AND pred.transactiondate LIKE '2017%%';
+    FROM
+        properties_2017 AS p
+            JOIN
+        predictions_2017 AS pred USING (parcelid)
+            JOIN
+        propertylandusetype AS ptype USING (propertylandusetypeid)
+    WHERE
+        ptype.propertylandusedesc LIKE '%%Single%%'
+            AND pred.transactiondate LIKE '2017%%';
      ```
 </details>
 
