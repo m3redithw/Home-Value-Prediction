@@ -33,7 +33,7 @@ In this project, we will use statistical testing to analyze the key factors of c
 *Year Built* | Integer |  The year the principal residence was built 
 *Assessed Value* | Float number | The total tax assessed value of the parcel
 *Tax Amount*| Float number | The total property tax assessed for that assessment year
-*Conty* | 1) Ventura 2) Los Angeles 3) Orange | County in which the property is located
+*County* | 1) Ventura 2) Los Angeles 3) Orange | County in which the property is located
 
 ## :placard:    Process
 #### :one:   Data Acquisition
