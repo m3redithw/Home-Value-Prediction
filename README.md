@@ -138,6 +138,7 @@ In this project, we will use statistical testing to analyze the key factors of c
     - General rull for handling outliers:
         - Upper bond: Q3 + 1.5 * IQR
         - Lower bond: Q1 - 1.5 * IQR
+    
         **Note:** each feature has minor adjustment based on data distribution
     - Outliers for each feature are dropped
         ```sh
@@ -170,7 +171,7 @@ In this project, we will use statistical testing to analyze the key factors of c
 
 - Create function `split()` to split data into **train, validate, test**
 
-- Test prepare function
+- Test split function
 
 - Check the size of each dataset
      ```sh
