@@ -25,12 +25,13 @@ In this project, we will use statistical analysis to analyze the key drivers of 
 ## :open_file_folder:   Data Dictionary
 **Variable** |    **Value**    | **Meaning**
 ---|---|---
-*Location* | Latitude, Longitude | This indicates where the property is located
+*Latitude* | Float number | Latitude of the middle of the parcel
+*Longitude* | Float number | Longitude of the middle of the parcel
 *Bedrooms* | Integer ranging from 1-6 | Number of bedrooms in home 
 *Bathrooms* | Float ranging from 0.5-6.5| Number of bathrooms in home including fractional bathrooms
 *Square Feet* | Float number | Calculated total finished living area of the home 
 *Lot Size* | Float number | Area of the lot in square feet
-*Year Built* | Integer |  The year the principal residence was built 
+*Age* | Integer |  This indicate the age of the property in 2017, calculated using the year the principal residence was built 
 *Assessed Value* | Float number | The total tax assessed value of the parcel
 *Tax Amount*| Float number | The total property tax assessed for that assessment year
 *County* | 1) Ventura 2) Los Angeles 3) Orange | County in which the property is located
