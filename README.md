@@ -50,19 +50,19 @@ In this project, we will use statistical testing to analyze the key factors of c
 - Write query to join useful tables to gather all data about the houses in the region:  <u>properties_2017, predictions_2017, propertylandusetype </u>
      ```sh
     SELECT 
-    CONCAT(CONCAT(SUBSTRING(longitude, 1, 4),
+    CONCAT(SUBSTRING(longitude, 1, 4),
                     ',',
-                    SUBSTRING(longitude, 5, 10)),
-            ', ',
-            CONCAT(SUBSTRING(latitude, 1, 2),
+                    SUBSTRING(longitude, 5, 10)) as longitude,
+	CONCAT(SUBSTRING(latitude, 1, 2),
                     ',',
-                    SUBSTRING(latitude, 3, 10))) AS location,
+                    SUBSTRING(latitude, 3, 10)) as latitude,
     bedroomcnt AS bedrooms,
     bathroomcnt AS bathrooms,
     calculatedfinishedsquarefeet AS square_feet,
     lotsizesquarefeet AS lot_size,
-    fips AS fips_code,
-    yearbuilt AS year_built,
+    poolcnt AS has_pool,
+    CONCAT ('0',fips) AS fips_code,
+    (2017 - yearbuilt) AS age,
     taxvaluedollarcnt AS assessed_value,
     taxamount AS tax_amount
     FROM
@@ -107,19 +107,55 @@ In this project, we will use statistical testing to analyze the key factors of c
 <details>
 <summary> Data Cleaning</summary>
 
-- **Missing values: null values are dropped**
-     ```sh
-    df = df.dropna()
-    ```
-- **Data types: float is converted to the int datatype**
+- **Missing values:**
+    - Null values for `has_pool` column is replaced with 0
+        ```sh
+        df.has_pool = df.has_pool.replace(np.nan, 0)
+        ``` 
+    - Other null values are dropped
+         ```sh
+        df = df.dropna()
+        ```
+- **Data types: float is converted to `int` datatype**
      ```sh
      df['fips_code'] = df['fips_code'].astype(int)
-     df['year_built'] = df['year_built'].astype(int)
+     df['age'] = df['age'].astype(int)
      ```
-- **Data mapping: created new 'county' column with county name corresponding to fips_code**
+- **Data mapping**
+    - created new `county` column with county name corresponding to fips_code**
+    - created new bins `bedrooms_size` and `bathrooms_size` for `bedrooms` and `bathrooms`
+             ```sh
+             df['bedrooms_size'] = pd.cut(df.bedrooms, bins = [0,2,4,6],
+                            labels = ['small', 'medium', 'large'])
+             df['bathrooms_size'] = pd.cut(df.bathrooms, bins = [0,2.5,4.5,6.5],
+                            labels = ['small', 'medium', 'large'])
+             ```
+- **Dummy variables:**
+    - Created dummy variables for categorical feature `county`, `bedrooms_size`, `bathrooms_size`
+    - Concatenated all dummy variables onto original dataframe
 
-- **Duplicate columns: duplicated columns are dropped**
+- **Outliers**
+    - General rull for handling outliers:
+        - Upper bond: Q3 + 1.5 * IQR
+        - Lower bond: Q1 - 1.5 * IQR
+        **Note:** each feature has minor adjustment based on data distribution
+    - Outliers for each feature are dropped
+        ```sh
+        df = df[df.bedrooms <= 6]
+        df = df[df.bedrooms >= 1]
 
+        df = df[df.bathrooms <= 6.5]
+        df = df[df.bathrooms >= 0.5]
+
+        df = df[df.square_feet <= 7982]
+        df = df[df.square_feet >= 493]
+
+        df = df[df.lot_size <= 152597]
+        df = df[df.lot_size >= 787]
+
+        df = df[df.assessed_value <= 2520956]
+        df = df[df.assessed_value >= 45366]
+        ```
 - Create function `prep_zillow` to clean and prepare data with steps above
 
 - Import [prepare.py](prepare.py)
@@ -180,7 +216,7 @@ In this project, we will use statistical testing to analyze the key factors of c
 
 ## :repeat:   Steps to Reproduce
 - [x] You will need an **env.py** file that contains the hostname, username and password of the mySQL database that contains the telco table. Store that env file locally in the repository.
-- [x] Clone my repo (including the **acquire.py**, **prepare.py** and **churn_rates.xlsx**) 
+- [x] Clone my repo (including the **imports.py**, **acquire.py**, **prepare.py**) 
 - [x] Confirm **.gitignore** is hiding your env.py file
 - [x] Libraries used are pandas, matplotlib, seaborn, plotly, sklearn, scipy
 - [x] Follow instructions in [telco_analysis](telco_analysis.ipynb) workbook and README file
