@@ -124,12 +124,12 @@ In this project, we will use statistical testing to analyze the key factors of c
 - **Data mapping**
     - created new `county` column with county name corresponding to fips_code**
     - created new bins `bedrooms_size` and `bathrooms_size` for `bedrooms` and `bathrooms`
-             ```sh
+             
              df['bedrooms_size'] = pd.cut(df.bedrooms, bins = [0,2,4,6],
                             labels = ['small', 'medium', 'large'])
              df['bathrooms_size'] = pd.cut(df.bathrooms, bins = [0,2.5,4.5,6.5],
                             labels = ['small', 'medium', 'large'])
-             ```
+             
 - **Dummy variables:**
     - Created dummy variables for categorical feature `county`, `bedrooms_size`, `bathrooms_size`
     - Concatenated all dummy variables onto original dataframe
