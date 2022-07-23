@@ -12,7 +12,7 @@ import acquire
 def prep_zillow(df):
 
     # Handle null values for pool
-    df.has_pool.fillna(value = 0)
+    df.has_pool = df.has_pool.replace(np.nan, 0)
     # Drop outliers
     df = df.dropna()
     
@@ -56,7 +56,7 @@ def prep_zillow(df):
     df = df[df.assessed_value <= 2520956]
     df = df[df.assessed_value >= 45366]
     return df
-    
+
 def split(df):
     '''
     This function drops the customer_id column and then splits a dataframe into 
