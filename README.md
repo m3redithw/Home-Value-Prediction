@@ -7,7 +7,9 @@
 <a href="#"><img alt="plotly" src="https://img.shields.io/badge/plotly-adcbe3.svg?logo=plotly&logoColor=white"></a>
 <a href="#"><img alt="sklearn" src="https://img.shields.io/badge/sklearn-4b86b4.svg?logo=scikitlearn&logoColor=white"></a>
 <a href="#"><img alt="SciPy" src="https://img.shields.io/badge/SciPy-1560bd.svg?logo=scipy&logoColor=white"></a>
-![](logo.jpeg)
+
+![logo](https://user-images.githubusercontent.com/105242871/180632056-229e205f-d3a5-4e04-a26d-d403f50a585f.jpg)
+
 
 The current property buying or selling is hectic and expensive. Efficiently predicting the property pricing for real estate customers with respect to their budgets and priorities is essential.
 
@@ -124,7 +126,7 @@ In this project, we will use statistical analysis to analyze the key drivers of 
      df['age'] = df['age'].astype(int)
      ```
 - **Data mapping**
-    - created new `county` column with county name corresponding to fips_code**
+    - created new `county` column with county name corresponding to **fips_code**
     - created new bins `bedrooms_size` and `bathrooms_size` for `bedrooms` and `bathrooms`
              
              df['bedrooms_size'] = pd.cut(df.bedrooms, bins = [0,2,4,6],
