@@ -17,11 +17,11 @@ def prep_zillow(df):
     df = df.dropna()
     
     # Change data type
-    df['fips_code'] = df['fips_code'].astype(int)
+    # df['fips_code'] = df['fips_code'].astype('object')
     df['age'] = df['age'].astype(int)
     
     # Data mapping
-    df['county'] = df.fips_code.map({6037: 'Los Angeles', 6059: 'Orange', 6111: 'Ventura'})
+    df['county'] = df.fips_code.map({'06037': 'Los Angeles', '06059': 'Orange', '06111': 'Ventura'})
     
     # Categorize bedrooms, bathrooms
     df['bedrooms_size'] = pd.cut(df.bedrooms, bins = [0,2,4,6],
