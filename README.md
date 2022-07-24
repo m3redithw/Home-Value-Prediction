@@ -7,6 +7,7 @@
 <a href="#"><img alt="plotly" src="https://img.shields.io/badge/plotly-adcbe3.svg?logo=plotly&logoColor=white"></a>
 <a href="#"><img alt="sklearn" src="https://img.shields.io/badge/sklearn-4b86b4.svg?logo=scikitlearn&logoColor=white"></a>
 <a href="#"><img alt="SciPy" src="https://img.shields.io/badge/SciPy-1560bd.svg?logo=scipy&logoColor=white"></a>
+![](logo.jpeg)
 
 The current property buying or selling is hectic and expensive. Efficiently predicting the property pricing for real estate customers with respect to their budgets and priorities is essential.
 
