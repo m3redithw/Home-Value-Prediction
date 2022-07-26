@@ -37,3 +37,7 @@ from sklearn.model_selection import train_test_split
 import env
 import acquire
 import prepare
+
+# Text display
+import colorama
+from colorama import Fore
