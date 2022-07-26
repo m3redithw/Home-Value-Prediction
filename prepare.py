@@ -50,11 +50,11 @@ def prep_zillow(df):
     df = df[df.square_feet <= 7982]
     df = df[df.square_feet >= 493]
 
-    df = df[df.lot_size <= 152597]
-    df = df[df.lot_size >= 787]
+    df = df[df.lot_size <= 105000]
+    df = df[df.lot_size >= 900]
 
-    df = df[df.assessed_value <= 2520956]
-    df = df[df.assessed_value >= 45366]
+    df = df[df.assessed_value <= 1300000]
+    df = df[df.assessed_value >= 45500]
     return df
 
 def split(df):
