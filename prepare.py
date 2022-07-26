@@ -47,13 +47,13 @@ def prep_zillow(df):
     df = df[df.bathrooms <= 6.5]
     df = df[df.bathrooms >= 0.5]
 
-    df = df[df.square_feet <= 7500]
+    df = df[df.square_feet <= 4800]
     df = df[df.square_feet >= 500]
 
     df = df[df.lot_size <= 100000]
     df = df[df.lot_size >= 900]
 
-    df = df[df.assessed_value <= 1050000]
+    df = df[df.assessed_value <= 1030000]
     df = df[df.assessed_value >= 45500]
     return df
 
