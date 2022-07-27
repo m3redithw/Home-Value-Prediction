@@ -221,6 +221,8 @@ In this project, we will use statistical analysis to analyze the key drivers of 
 - Create generalized linear model `(TweedieRegressor)` and fit train dataset
 
 - Pick the top 3 models among all the models and evaluate performance on validate dataset
+    
+- Stored model performance on train and validate in [model_performance.csv](model_performance.csv)
 
 - Pick the model with highest accuracy and evaluate on test dataset
 
