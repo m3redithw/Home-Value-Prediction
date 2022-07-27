@@ -7,7 +7,7 @@
 <a href="#"><img alt="plotly" src="https://img.shields.io/badge/plotly-adcbe3.svg?logo=plotly&logoColor=white"></a>
 <a href="#"><img alt="sklearn" src="https://img.shields.io/badge/sklearn-4b86b4.svg?logo=scikitlearn&logoColor=white"></a>
 <a href="#"><img alt="SciPy" src="https://img.shields.io/badge/SciPy-1560bd.svg?logo=scipy&logoColor=white"></a>
-<a href="#"><img alt="GeoPandas" src="https://img.shields.io/badgeGeoPandas-1faecf.svg?logo=geopandas&logoColor=white"></a>
+<a href="#"><img alt="GeoPandas" src="https://img.shields.io/badge/GeoPandas-1faecf.svg?logo=python-geopandas&logoColor=white"></a>
 
 ![logo](https://user-images.githubusercontent.com/105242871/180632056-229e205f-d3a5-4e04-a26d-d403f50a585f.jpg)
 
