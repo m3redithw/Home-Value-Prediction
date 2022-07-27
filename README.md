@@ -190,7 +190,9 @@ In this project, we will use statistical analysis to analyze the key drivers of 
 #### :three:   Exploratory Analysis
 - Ask questions to find what are the key features that are associated with property assessed value
 
-- Explore each feature's correlation with assessed value and create visualization for each
+- Explore each feature's correlation with assessed value
+
+- Using visualizations to better understand the relationship between features
 
 #### :four:    Statistical Testing & Modeling
 - Conduct T-Test for categorical variable vs. numerical variable
@@ -199,21 +201,17 @@ In this project, we will use statistical analysis to analyze the key drivers of 
 
 - Conclude hypothesis and address the initial questions
 #### :five:    Modeling Evaluation
-- Create decision tree classifer and fit train dataset
+- Create multiple regression model and use Recursive Feature Elimination (RFE) to select features
 
-- Find the max depth for the best performing decision tree classifer (evaluated using classification report, accuracy score)
+- Find the amount of features that can gerenate the highest performance (evaluated using Root Mean Squared Error)
 
-- Create random forest classifier and fit train dataset
+- Generate polynomial model, fit and tranform the train dataset into feature
 
-- Find the max depth for the best performing random forest classifier (evaluated using classification report, accuracy score)
+- Find the degree that generates the best performing model (evaluated using RMSE)
 
-- Create KNN classifier and fit train dataset
+- Create lasso-lars model object, fit the model to our training data, and use the model to make predictions
 
-- Find the k for the best performing KNN classifier (evaluated using classification report, accuracy score)
-
-- Create logistic regression model and fit train dataset
-
-- Find the parameter C for the best performing logistic regression model (evaluated using classification report, accuracy score)
+- Create generalized linear model `(TweedieRegressor)` and fit train dataset
 
 - Pick the top 3 models among all the models and evaluate performance on validate dataset
 
@@ -224,41 +222,46 @@ In this project, we will use statistical analysis to analyze the key drivers of 
 - [x] Clone my repo (including the **imports.py**, **acquire.py**, **prepare.py**) 
 - [x] Confirm **.gitignore** is hiding your env.py file
 - [x] Libraries used are pandas, matplotlib, seaborn, plotly, sklearn, scipy
-- [x] Follow instructions in [telco_analysis](telco_analysis.ipynb) workbook and README file
-- [x] Good to run telco_report :smile_cat:
+- [x] Follow instructions in [zillow_eda](zillow_eda.ipynb) workbook and README file
+- [x] Good to run final report :smile_cat:
 
 ## :key:    Key Findings
 
-▪️ The top 4 drivers of churn are:
+▪️ The top 5 drivers of property assessed value are:
 
- - electronic payment type
+ - square feet
  
- - sernior citizens
+ - size of bedrooms and bathrooms
  
- - month-to-month contract type
+ - lot size
  
- - fiber optic internet service type
-    
-    
-▪️ Average **monthly charges** is higher for customers who churn
+ - conuty
  
-▪️ Average **tenure** is shorter for customers who churn
+ - has pool or not
  
-▪️ Additional services (device protection, online security, online backup, tech support, streaming tv, streaming movies) are dependent on churn
+▪️ **Square feet** has a strong positive relationship with property tax assessed value
 
-▪️ The meachine learning model: logistic regression classifier is expected to predict churn with **81% accuracy** on future unseen data
+▪️ Property tax assessed value is dependent on the number of **bedrooms** and **bathrooms**.
+
+▪️ Mean of property tax assessed value of Los Angeles, Orange, and Ventura County are not all equal.
+- Los Angeles county has the lowest property tax assessed value on average
+- Orange county has the highest property tax assessed value on average
+
+▪️ Properties with **pool** has a higher property tax assessed value on average than properties without pool.
+
+▪️ The age of the property (2017 - year_built) has a negative medium correlation with property tax assessed value.
+
+▪️ The meachine learning model: polynomial features degree 3 is expected to predict housing prices within variance of **$202015** on average on future unseen data
 
 ## :high_brightness:    Recommendations
-▪️ Raise price of month-to-month contract type and offer discounts for two-year contract to lead customers towards the other two contract types
+▪️ To better understand the relationship between features and the target vairable, we need more information on the properties' **location**
 
-▪️ Offer discount on device protection, streaming tv and streaming movies services
-
-▪️ Offer online security, online backup, tech support services for free for one-year and two-year contracts customers
+▪️ To improve model's accuracy, we need more accurate latitude and longtitude data to pinpoint the property.
 
 
 ## 🔜  Next Steps
-▪️ Collect more data on customers' **demographic information** (eg. place of residence, socio-economic data such as occupation, household income.)
+▪️ Collect more **geographic** data on the property(e.g. local school, surrounding properties, distance from downtown, city population, etc.)
 
-▪️ Develop machine learning models with higher accuracy with these additonal data and more accurate features.
+▪️ Develop machine learning models with higher accuracy (lower RMSE) with these additonal data and make better predictions.
 
-▪️ Conduct **price discrimination analysis** to further determine the price point for each contract type and service.
+▪️ Collect data on previous years to analyze the general trend of each area, and determine what features drive the housing prices the most.
