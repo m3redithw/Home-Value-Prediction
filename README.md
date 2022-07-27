@@ -15,9 +15,9 @@ The current property buying or selling is hectic and expensive. Efficiently pred
 
 In this project, we will use statistical analysis to analyze the key drivers of perperty value for single family properties, develop a ML regression model to predict property tax assessed value, and provide recommendations on making better homes' values prediction.
 ## :house:   Project Goals
-- Construct an ML Regression model that predict **propery tax assessed values** ('assessed_value') of Single Family Properties using attributes of the properties.
+- Find the key drivers of property value for **single family properties** in 2017.
 
-- Find the key drivers of property value for **single family properties** in 2017. Why do some properties have a much higher value than others when they are located so close to each other? Why are some properties valued so differently from others when they have nearly the same physical attributes but only differ in location? Is having 1 bathroom worse than having 2 bedrooms?
+- Construct an ML Regression model that predict **propery tax assessed values** ('assessed_value') of Single Family Properties using attributes of the properties.
 
 - Deliver a report that the data science team can read through and replicate, understand what steps were taken, why and what the outcome was.
 
