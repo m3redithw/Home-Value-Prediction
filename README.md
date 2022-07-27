@@ -241,7 +241,7 @@ In this project, we will use statistical analysis to analyze the key drivers of 
  
  - lot size
  
- - conuty
+ - county
  
  - has pool or not
  
