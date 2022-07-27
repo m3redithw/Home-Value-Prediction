@@ -1,0 +1,9 @@
+﻿model,data,score
+polynomial,train,200429
+polynomial,validate,199529
+multiple regression,train,207896
+multiple regression,validate,199529
+lasso_lars,train,207897
+lasso_lars,validate,205508
+baseline,train,237872
+baseline,validate,235949
