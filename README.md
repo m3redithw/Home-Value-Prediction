@@ -46,6 +46,10 @@ In this project, we will use statistical analysis to analyze the key drivers of 
 *Tax Amount*| Float number | The total property tax assessed for that assessment year
 *County* | 1) Ventura 2) Los Angeles 3) Orange | County in which the property is located
 
+## 📊   Data Context
+We have data of **47128** single family properties. **5** categorical variables and **5** numerical variables.
+![data_context](https://user-images.githubusercontent.com/105242871/182519138-c7667f71-9aeb-4bf6-a88c-528a02e50a6b.jpg)
+
 ## :placard:   Project Plan / Process
 #### :one:   Data Acquisition
 
@@ -261,6 +265,8 @@ In this project, we will use statistical analysis to analyze the key drivers of 
 ▪️ The age of the property (2017 - year_built) has a negative medium correlation with property tax assessed value.
 
 ▪️ The meachine learning model: polynomial features degree 3 is expected to predict housing prices within variance of **$202015** on average on future unseen data
+<img width="888" alt="polynomial_model" src="https://user-images.githubusercontent.com/105242871/182519391-4a0df121-0e42-47b0-a157-38cd6eedf27a.png">
+
 
 ## :high_brightness:    Recommendations
 ▪️ To better understand the relationship between features and the target vairable, we need more information on the properties' **location**
