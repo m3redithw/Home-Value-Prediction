@@ -13,7 +13,8 @@ def prep_zillow(df):
 
     # Handle null values for pool
     df.has_pool = df.has_pool.replace(np.nan, 0)
-    # Drop outliers
+
+    # Drop missing values
     df = df.dropna()
     
     # Change data type
@@ -29,8 +30,6 @@ def prep_zillow(df):
     df['bathrooms_size'] = pd.cut(df.bathrooms, bins = [0,2.5,4.5,6.5],
                             labels = ['small', 'medium', 'large'])
 
-    # Drop column
-    # df = df.drop(['fips_code'], axis=1)
     
     # Make dummy columns and concatenate on original dataframe 
     dummy_df = pd.get_dummies(df[['county', 'bedrooms_size', 'bathrooms_size']], dummy_na=False, drop_first=False)
@@ -59,7 +58,7 @@ def prep_zillow(df):
 
 def split(df):
     '''
-    This function drops the customer_id column and then splits a dataframe into 
+    This function splits a dataframe into 
     train, validate, and test in order to explore the data and to create and validate models. 
     It takes in a dataframe and contains an integer for setting a seed for replication. 
     Test is 20% of the original dataset. The remaining 80% of the dataset is 
