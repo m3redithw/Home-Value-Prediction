@@ -264,7 +264,7 @@ We have data of **47128** single family properties. **5** categorical variables 
 
 ▪️ The age of the property (2017 - year_built) has a negative medium correlation with property tax assessed value.
 
-▪️ The meachine learning model: polynomial features degree 3 is expected to predict housing prices within variance of **$202015** on average on future unseen data
+▪️ The machine learning model: polynomial features degree 3 is expected to predict housing prices within variance of **$202015** on average on future unseen data
 <img width="888" alt="polynomial_model" src="https://user-images.githubusercontent.com/105242871/182519391-4a0df121-0e42-47b0-a157-38cd6eedf27a.png">
 
 
